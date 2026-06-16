@@ -22,7 +22,7 @@ if st.button("Upload Dataset"):
         }
 
         upload_response = requests.post(
-            "http://127.0.0.1:8000/upload",
+            "https://data-engineering-chatbot-api.onrender.com",
             files=files
         )
 
@@ -42,8 +42,8 @@ question = st.text_input("Ask a question")
 if st.button("Send"):
 
     response = requests.post(
-        "http://127.0.0.1:8000/chat",
-        json={"question": question}
+        "https://data-engineering-chatbot-api.onrender.com",    ##"http://127.0.0.1:8000/chat",
+        files=files     ##json={"question": question}
     )
 
     if response.status_code == 200:
@@ -56,7 +56,7 @@ st.divider()
 # Download Section
 if st.button("📥 Download Cleaned Dataset"):
 
-    download_url = "http://127.0.0.1:8000/download"
+    download_url = "https://data-engineering-chatbot-api.onrender.com/download"
 
     st.markdown(
         f"[📥 Click Here To Download Cleaned Dataset]({download_url})"
