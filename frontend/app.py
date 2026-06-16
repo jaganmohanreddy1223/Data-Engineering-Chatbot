@@ -8,7 +8,7 @@ uploaded_file = st.file_uploader(
     type=["csv", "xlsx"]
 )
 
-# Upload Button
+
 if st.button("Upload Dataset"):
 
     if uploaded_file is not None:
@@ -22,7 +22,7 @@ if st.button("Upload Dataset"):
         }
 
         upload_response = requests.post(
-            "https://data-engineering-chatbot-api.onrender.com",
+            "http://127.0.0.1:8000/chat",
             files=files
         )
 
@@ -36,14 +36,13 @@ if st.button("Upload Dataset"):
 
 st.divider()
 
-# Chat Section
 question = st.text_input("Ask a question")
 
 if st.button("Send"):
 
     response = requests.post(
-        "https://data-engineering-chatbot-api.onrender.com",    ##"http://127.0.0.1:8000/chat",
-        files=files     ##json={"question": question}
+        "http://127.0.0.1:8000/chat",
+        json={"question": question}
     )
 
     if response.status_code == 200:
@@ -53,10 +52,9 @@ if st.button("Send"):
 
 st.divider()
 
-# Download Section
 if st.button("📥 Download Cleaned Dataset"):
 
-    download_url = "https://data-engineering-chatbot-api.onrender.com/download"
+    download_url = "http://127.0.0.1:8000/chat/download"
 
     st.markdown(
         f"[📥 Click Here To Download Cleaned Dataset]({download_url})"
